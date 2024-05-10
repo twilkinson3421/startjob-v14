@@ -14,9 +14,11 @@ declare global {
       type Locale = (typeof locale_config.supported.locales)[number];
       type RootNamespace = (typeof locale_config.supported.namespaces)[number];
       type Namespace = RootNamespace | `${RootNamespace}.${string}`;
-      type LocaleParam = Readonly<{ params: { locale: Locale } }>;
       type Dictionary = Record<Locale, Deprecated.Reference>;
       type LocaleDictionary = Record<RootNamespace, Deprecated.Reference>;
+      type LocaleParam = Readonly<{ params: { locale: Locale } }>;
+      type LocaleProp = Readonly<{ locale: Locale }>;
+      type DictionaryProp = Readonly<{ dictionary: Dictionary }>;
       type TFunction = Type_TFunction;
     }
 
