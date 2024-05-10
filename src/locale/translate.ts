@@ -22,7 +22,7 @@ function get_translation(
 }
 
 export function translate(
-  key: string,
+  key: GTypes.Locale.Namespace,
   override_dictionary?: GTypes.Locale.Dictionary,
   override_locale?: GTypes.Locale.Locale
 ): string {
