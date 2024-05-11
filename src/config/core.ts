@@ -1,3 +1,3 @@
 export const coreConfig = {
-  suppressHydrationWarning: true,
+  suppressHydrationWarning: process.env.NODE_ENV !== "development",
 };

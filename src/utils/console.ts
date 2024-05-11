@@ -5,7 +5,7 @@ export const konsole = {
     console.error(
       `${chalk.bgRed(chalk.bold(" ERROR "))} ${message}${
         reason
-          ? `\n${chalk.bgBlue(chalk.bold(" REASON "))} ${chalk.gray(
+          ? `\n${chalk.bgBlue(chalk.bold(" REASON "))} ${chalk.grey(
               chalk.italic(reason)
             )}\n`
           : `\n`
