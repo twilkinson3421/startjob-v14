@@ -1,14 +1,14 @@
-import { konsole } from "@/utils/console";
-import { dictionary } from "@locale/compile_dictionary";
-import { locale_config } from "@locale/config";
 import chalk from "chalk";
+import { konsole } from "@/utils/console";
+import { dictionary } from "@locale/compileDictionary";
+import { localeConfig } from "@locale/config";
 
-function get_translation(
+function getTranslation(
   key: string,
-  override_dictionary?: GTypes.Locale.Dictionary
+  overrideDictionary?: GTypes.Locale.Dictionary
 ) {
   const segments = key.split(".");
-  let translation = (override_dictionary ?? dictionary) as any;
+  let translation = (overrideDictionary ?? dictionary) as any;
   if (!translation) throw new Error("No dictionary provided");
 
   for (const i_segment of segments) {
@@ -23,16 +23,16 @@ function get_translation(
 
 export function translate(
   key: GTypes.Locale.Namespace,
-  override_dictionary?: GTypes.Locale.Dictionary,
-  override_locale?: GTypes.Locale.Locale
+  overrideDictionary?: GTypes.Locale.Dictionary,
+  overrideLocale?: GTypes.Locale.Locale
 ): string {
-  const locale = override_locale ?? locale_config.defaults.locale;
-  const scoped_dictionary = override_dictionary ?? dictionary;
+  const locale = overrideLocale ?? localeConfig.defaults.locale;
+  const scopedDictionary = overrideDictionary ?? dictionary;
 
   const path = `${locale}.${key}`;
 
   try {
-    const translation = get_translation(path, scoped_dictionary);
+    const translation = getTranslation(path, scopedDictionary);
     if (!translation) throw new Error("Translation not found");
     return translation;
   } catch (error) {
@@ -47,38 +47,38 @@ export function translate(
 export type TFunction = typeof translate;
 
 export function genT(
-  gen_locale?: GTypes.Locale.Locale,
-  gen_namespace?: GTypes.Locale.Namespace,
-  gen_dictionary?: GTypes.Locale.Dictionary
+  genLocale?: GTypes.Locale.Locale,
+  genNamespace?: GTypes.Locale.Namespace,
+  genDictionary?: GTypes.Locale.Dictionary
 ): GTypes.Locale.TFunction {
-  gen_locale ??= locale_config.defaults.locale;
-  gen_namespace ??= locale_config.defaults.namespace;
-  gen_dictionary ??= dictionary;
+  genLocale ??= localeConfig.defaults.locale;
+  genNamespace ??= localeConfig.defaults.namespace;
+  genDictionary ??= dictionary;
 
   return (
     key: string,
-    override_dictionary?: GTypes.Locale.Dictionary,
-    override_locale?: GTypes.Locale.Locale
+    overrideDictionary?: GTypes.Locale.Dictionary,
+    overrideLocale?: GTypes.Locale.Locale
   ) =>
     translate(
-      `${gen_namespace}.${key}`,
-      override_dictionary ?? gen_dictionary,
-      override_locale ?? gen_locale
+      `${genNamespace}.${key}`,
+      overrideDictionary ?? genDictionary,
+      overrideLocale ?? genLocale
     );
 }
 
-export function adapt_namespace(
-  old_function: GTypes.Locale.TFunction,
-  new_namespace: GTypes.Locale.Namespace
+export function adaptNamespace(
+  oldFunction: GTypes.Locale.TFunction,
+  newNamespace: GTypes.Locale.Namespace
 ): GTypes.Locale.TFunction {
   return (
     key: string,
-    override_dictionary?: GTypes.Locale.Dictionary,
-    override_locale?: GTypes.Locale.Locale
+    overrideDictionary?: GTypes.Locale.Dictionary,
+    overrideLocale?: GTypes.Locale.Locale
   ) =>
-    old_function(
-      `${new_namespace}.${key}`,
-      override_dictionary ?? undefined,
-      override_locale ?? undefined
+    oldFunction(
+      `${newNamespace}.${key}`,
+      overrideDictionary ?? undefined,
+      overrideLocale ?? undefined
     );
 }

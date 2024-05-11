@@ -10,7 +10,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const auth_config = {
+export const authConfig = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -51,5 +51,5 @@ export function auth(
     | [NextApiRequest, NextApiResponse]
     | []
 ) {
-  return getServerSession(...args, auth_config);
+  return getServerSession(...args, authConfig);
 }

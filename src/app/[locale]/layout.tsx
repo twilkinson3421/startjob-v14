@@ -1,10 +1,10 @@
 import "@app/globals.scss";
-import { core_config } from "@config/core";
+import { coreConfig } from "@config/core";
 import { AuthProvider } from "@providers/auth";
 import { Kanit as FontSans } from "next/font/google";
-import { dictionary } from "@locale/compile_dictionary";
+import { dictionary } from "@locale/compileDictionary";
 import { LocaleContextProvider } from "@providers/locale";
-import { LocaleLogProvider } from "@locale/log_provider";
+import { LocaleLogProvider } from "@locale/logProvider";
 
 const fontSans = FontSans({
   subsets: ["latin", "latin-ext"],
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang={locale}
-      suppressHydrationWarning={core_config.suppress_hydration_warning}
+      suppressHydrationWarning={coreConfig.suppressHydrationWarning}
     >
       <body className={fontSans.className}>
         <LocaleLogProvider />

@@ -1,31 +1,25 @@
-import { auth_config } from "@lib/auth";
+import { authConfig } from "@lib/auth";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-export async function session_exists() {
-  const session = await getServerSession(auth_config);
+export async function sessionExists() {
+  const session = await getServerSession(authConfig);
   return !!session;
 }
 
-export async function get_session() {
-  const session = await getServerSession(auth_config);
+export async function getSession() {
+  const session = await getServerSession(authConfig);
   return session;
 }
 
-export async function get_session_or_redirect(
-  target: string,
-  invert?: boolean
-) {
-  const session = await getServerSession(auth_config);
+export async function getSessionOrRedirect(target: string, invert?: boolean) {
+  const session = await getServerSession(authConfig);
   if (invert ? !!session : !session) redirect(target);
   return session;
 }
 
-export async function get_session_or_custom(
-  func: () => void,
-  invert?: boolean
-) {
-  const session = await getServerSession(auth_config);
+export async function getSessionOrCustom(func: () => void, invert?: boolean) {
+  const session = await getServerSession(authConfig);
   if (invert ? !!session : !session) func();
   return session;
 }

@@ -1,3 +1,3 @@
-export const core_config = {
-  suppress_hydration_warning: true,
+export const coreConfig = {
+  suppressHydrationWarning: true,
 };

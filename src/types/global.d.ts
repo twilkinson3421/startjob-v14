@@ -1,4 +1,4 @@
-import { locale_config } from "@locale/config";
+import { localeConfig } from "@locale/config";
 import type { Metadata as Type_Metadata } from "next";
 import type { TFunction as Type_TFunction } from "@locale/translate";
 import type { ReplaceStringPart as Type_ReplaceStringPart } from "@types/utils";
@@ -11,8 +11,8 @@ declare global {
     }
 
     namespace Locale {
-      type Locale = (typeof locale_config.supported.locales)[number];
-      type RootNamespace = (typeof locale_config.supported.namespaces)[number];
+      type Locale = (typeof localeConfig.supported.locales)[number];
+      type RootNamespace = (typeof localeConfig.supported.namespaces)[number];
       type Namespace = RootNamespace | `${RootNamespace}.${string}`;
       type Dictionary = Record<Locale, Deprecated.Reference>;
       type LocaleDictionary = Record<RootNamespace, Deprecated.Reference>;
