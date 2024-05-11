@@ -1,4 +1,5 @@
 import chalk from "chalk";
+
 import { konsole } from "@/utils/console";
 import { dictionary } from "@locale/compileDictionary";
 import { localeConfig } from "@locale/config";

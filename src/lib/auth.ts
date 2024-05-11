@@ -4,11 +4,11 @@ import type {
   NextApiResponse,
 } from "next";
 import bcrypt from "bcryptjs";
-import User from "@models/user";
-import { getServerSession } from "next-auth";
-import { connectMongoDB } from "@/lib/mongodb";
-import { type NextAuthOptions } from "next-auth";
+import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+import { connectMongoDB } from "@/lib/mongodb";
+import User from "@models/user";
 
 export const authConfig = {
   providers: [

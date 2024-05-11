@@ -1,6 +1,7 @@
-import { konsole } from "@/utils/console";
-import { localeConfig } from "./config";
 import chalk from "chalk";
+
+import { konsole } from "@/utils/console";
+import { localeConfig } from "@locale/config";
 
 export function checkSupportedLocales() {
   for (const iLocale of localeConfig.supported.locales) {

@@ -1,4 +1,5 @@
 import { localeConfig } from "@locale/config";
+
 import type { Metadata as Type_Metadata } from "next";
 import type { TFunction as Type_TFunction } from "@locale/translate";
 import type { ReplaceStringPart as Type_ReplaceStringPart } from "@types/utils";

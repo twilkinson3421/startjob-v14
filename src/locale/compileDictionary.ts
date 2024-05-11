@@ -1,7 +1,8 @@
-import { konsole } from "@utils/console";
 import chalk, { supportsColor } from "chalk";
-import { getDictionaryPath } from "@locale/getDictionaryPath";
+
 import { localeConfig } from "@locale/config";
+import { getDictionaryPath } from "@locale/getDictionaryPath";
+import { konsole } from "@utils/console";
 
 function compileDictionary() {
   const dictionary = {} as GTypes.Locale.Dictionary;

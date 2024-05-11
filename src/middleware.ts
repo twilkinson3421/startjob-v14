@@ -1,6 +1,7 @@
 import acceptLanguage from "accept-language";
+import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
+
 import { localeConfig } from "./locale/config";
-import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 
 export const middleware = (request: NextRequest, _event: NextFetchEvent) => {
   acceptLanguage.languages([...localeConfig.supported.locales]);

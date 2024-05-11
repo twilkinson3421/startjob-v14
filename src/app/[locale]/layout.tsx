@@ -1,10 +1,12 @@
 import "@app/globals.scss";
-import { coreConfig } from "@config/core";
-import { AuthProvider } from "@providers/auth";
+
 import { Kanit as FontSans } from "next/font/google";
+
+import { coreConfig } from "@config/core";
 import { dictionary } from "@locale/compileDictionary";
-import { LocaleContextProvider } from "@providers/locale";
 import { LocaleLogProvider } from "@locale/logProvider";
+import { AuthProvider } from "@providers/auth";
+import { LocaleContextProvider } from "@providers/locale";
 
 const fontSans = FontSans({
   subsets: ["latin", "latin-ext"],
