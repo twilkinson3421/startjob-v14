@@ -30,10 +30,11 @@
       "@models/*": ["./src/models/*"],
       "@config/*": ["./src/config/*"],
       "@locale/*": ["./src/locale/*"],
-      "@middleware/*": ["./src/middleware/*"],
       "@handlers/*": ["./src/handlers/*"],
       "@providers/*": ["./src/providers/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@actions/*": ["./src/handlers/actions/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
