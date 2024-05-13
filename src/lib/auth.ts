@@ -1,14 +1,15 @@
-import type {
-  GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-} from "next";
 import bcrypt from "bcryptjs";
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@models/user";
+
+import type {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next";
 
 export const authConfig = {
   providers: [

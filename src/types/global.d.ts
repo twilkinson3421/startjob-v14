@@ -15,8 +15,8 @@ declare global {
       type Locale = (typeof localeConfig.supported.locales)[number];
       type RootNamespace = (typeof localeConfig.supported.namespaces)[number];
       type Namespace = RootNamespace | `${RootNamespace}.${string}`;
-      type Dictionary = Record<Locale, Deprecated.Reference>;
-      type LocaleDictionary = Record<RootNamespace, Deprecated.Reference>;
+      type Dictionary = Record<Locale, Internal.Reference>;
+      type LocaleDictionary = Record<RootNamespace, Internal.Reference>;
       type LocaleParam = Readonly<{ params: { locale: Locale } }>;
       type LocaleProp = Readonly<{ locale: Locale }>;
       type DictionaryProp = Readonly<{ dictionary: Dictionary }>;
@@ -36,7 +36,7 @@ declare global {
       > = Type_ReplaceStringPart<FullString, NewPart>;
     }
 
-    namespace Deprecated {
+    namespace Internal {
       type Reference = { [key: string]: string | Reference };
     }
   }
