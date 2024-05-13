@@ -30,6 +30,7 @@
       "@models/*": ["./src/models/*"],
       "@config/*": ["./src/config/*"],
       "@locale/*": ["./src/locale/*"],
+      "@middleware/*": ["./src/middleware/*"],
       "@handlers/*": ["./src/handlers/*"],
       "@providers/*": ["./src/providers/*"],
       "@components/*": ["./src/components/*"]
