@@ -5,6 +5,7 @@ import { getDictionaryPath } from "@locale/getDictionaryPath";
 import { konsole } from "@utils/console";
 
 function compileDictionary() {
+  if (typeof window !== "undefined") return null;
   const dictionary = {} as GTypes.Locale.Dictionary;
 
   for (const iLocale of localeConfig.supported.locales) {
@@ -14,8 +15,9 @@ function compileDictionary() {
       const filePath = getDictionaryPath(iLocale, iNamespace);
 
       try {
+        let fs;
         if (typeof window !== "undefined") throw new Error("Wrong Environment");
-        const fs = require("fs");
+        if (typeof window === "undefined") fs = require("fs");
         const fileContents = fs.readFileSync(filePath, "utf8");
         localeDictionary[iNamespace] = JSON.parse(fileContents);
       } catch (error) {
