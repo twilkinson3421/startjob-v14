@@ -1,11 +1,13 @@
-import { At, Equals, User, Users } from "@phosphor-icons/react/dist/ssr";
+import { IconAt, IconMenu, IconUser, IconUsers } from "@tabler/icons-react";
 
-import type { Icon, IconProps } from "@phosphor-icons/react";
+import type { Icon, IconProps } from "@tabler/icons-react";
 
 export namespace Icons {
   export namespace Types {
     export type ComponentProps = IconProps;
-    export type Component = Icon;
+    export type Component = React.ForwardRefExoticComponent<
+      Omit<IconProps, "ref"> & React.RefAttributes<Icon>
+    >;
   }
 
   export namespace Internal {
@@ -33,13 +35,13 @@ export namespace Icons {
 
   export const { Interface, Application } = Icons.Internal.initIcons({
     Interface: {
-      Menu: Equals,
+      Menu: IconMenu,
     },
 
     Application: {
-      User: User,
-      Team: Users,
-      Email: At,
+      User: IconUser,
+      Team: IconUsers,
+      Email: IconAt,
     },
   });
 }
