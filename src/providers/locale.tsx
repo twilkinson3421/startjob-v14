@@ -2,9 +2,11 @@
 
 import { createContext, useContext } from "react";
 
+import { localeConfig } from "@/locale/config";
+
 type LocaleContextValue = {
   locale: GTypes.Locale.Locale;
-  dictionary: GTypes.Locale.Dictionary;
+  dictionary?: GTypes.Locale.Dictionary;
 };
 
 type TranslationContextValue = {
@@ -12,8 +14,8 @@ type TranslationContextValue = {
 };
 
 const LocaleContext = createContext<LocaleContextValue>({
-  locale: null as any,
-  dictionary: null as any,
+  locale: localeConfig.defaults.locale,
+  dictionary: undefined,
 });
 
 const TranslationContext = createContext<TranslationContextValue>({

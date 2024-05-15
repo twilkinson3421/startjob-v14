@@ -33,7 +33,7 @@ export default function RootLayout({
       <body>
         <LocaleLogProvider />
         <AuthProvider>
-          <LocaleContextProvider {...{ locale, dictionary: dictionary! }}>
+          <LocaleContextProvider {...{ locale, dictionary }}>
             {children}
           </LocaleContextProvider>
         </AuthProvider>
