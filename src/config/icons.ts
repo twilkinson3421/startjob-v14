@@ -1,4 +1,4 @@
-import { IconAt, IconMenu, IconUser, IconUsers } from "@tabler/icons-react";
+import { IconAt, IconMenu, IconUser, IconUsersGroup } from "@tabler/icons-react";
 
 import type { Icon, IconProps } from "@tabler/icons-react";
 
@@ -40,7 +40,7 @@ export namespace Icons {
 
     Application: {
       User: IconUser,
-      Team: IconUsers,
+      Team: IconUsersGroup,
       Email: IconAt,
     },
   });
