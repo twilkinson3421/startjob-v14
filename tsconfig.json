@@ -34,7 +34,9 @@
       "@providers/*": ["./src/providers/*"],
       "@components/*": ["./src/components/*"],
       "@middleware/*": ["./src/middleware/*"],
-      "@actions/*": ["./src/handlers/actions/*"]
+      "@actions/*": ["./src/handlers/actions/*"],
+      "@ui-core/*": ["./src/components/interface/core/*"],
+      "@ui-layout/*": ["./src/components/interface/layout/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
