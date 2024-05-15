@@ -5,7 +5,7 @@ import { getDictionaryPath } from "@locale/getDictionaryPath";
 import { konsole } from "@utils/console";
 
 function compileDictionary() {
-  if (typeof window !== "undefined") return null;
+  if (typeof window !== "undefined") return undefined;
   const dictionary = {} as GTypes.Locale.Dictionary;
 
   for (const iLocale of localeConfig.supported.locales) {

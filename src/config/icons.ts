@@ -1,4 +1,4 @@
-import { Equals, User, Users } from "@phosphor-icons/react/dist/ssr";
+import { At, Equals, User, Users } from "@phosphor-icons/react/dist/ssr";
 
 import type { Icon, IconProps } from "@phosphor-icons/react";
 
@@ -39,6 +39,7 @@ export namespace Icons {
     Application: {
       User: User,
       Team: Users,
+      Email: At,
     },
   });
 }

@@ -11,6 +11,7 @@ import { LocaleContextProvider } from "@providers/locale";
 const fontSans = FontSans({
   subsets: ["latin", "latin-ext"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   variable: "--font-sans",
   display: "swap",
 });
@@ -27,11 +28,12 @@ export default function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning={coreConfig.suppressHydrationWarning}
+      className={fontSans.className}
     >
-      <body className={fontSans.className}>
+      <body>
         <LocaleLogProvider />
         <AuthProvider>
-          <LocaleContextProvider {...{ locale, dictionary }}>
+          <LocaleContextProvider {...{ locale, dictionary: dictionary! }}>
             {children}
           </LocaleContextProvider>
         </AuthProvider>

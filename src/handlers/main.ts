@@ -25,8 +25,8 @@ export namespace Handlers {
     };
 
     export interface ServerError extends Response<null> {
-      status: 500;
       ok: false;
+      status: 500;
       message: (typeof Config.responses)[500];
       data: null;
     }
