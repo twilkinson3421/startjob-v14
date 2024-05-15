@@ -22,14 +22,14 @@ export namespace Icons {
   }
 
   export const Sizes = {
-    default: 16,
-    smallx: 12,
-    small: 14,
-    medium: 22,
+    default: 24,
+    smallx: 16,
+    small: 20,
+    medium: 24,
     large: 28,
     largex: 32,
-    large2x: 48,
-    large3x: 64,
+    largex2: 48,
+    largex3: 64,
     inline: undefined,
   } as const satisfies Record<string, IconProps["size"]>;
 
