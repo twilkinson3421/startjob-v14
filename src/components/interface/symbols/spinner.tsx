@@ -5,7 +5,7 @@ import { Interface } from "@utils/interface";
 
 const [spinnerVariants, applySpinnerVariants] =
   Interface.Methods.registerVariants({
-    base: "",
+    base: "animate-spin ease-in-out",
     variants: {},
     default: {},
   } as const);

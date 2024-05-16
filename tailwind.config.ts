@@ -42,10 +42,10 @@ const config: Config = {
       },
 
       transitionDuration: {
-        default: "var(--transition)",
+        DEFAULT: "var(--transition)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;

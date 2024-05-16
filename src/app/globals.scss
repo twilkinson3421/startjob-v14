@@ -21,7 +21,7 @@ $global-theme: (
   --border: 174 9.9% 89.88%,
 
   --radius: 0.4rem,
-  --transition: 0.1s,
+  --transition: 0.2s,
 );
 
 $light-theme-override: (
@@ -68,9 +68,5 @@ $dark-theme: map-merge($global-theme, $dark-theme-override);
 
   body {
     @apply bg-background text-foreground;
-  }
-
-  :root * {
-    @apply transition-all duration-300;
   }
 }
