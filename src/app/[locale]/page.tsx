@@ -2,6 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 
+import { Icons } from "@/config/icons";
 import { genT } from "@locale/translate";
 import { useLocaleContext } from "@providers/locale";
 import { Button } from "@ui-core/button";
@@ -18,15 +19,17 @@ export default function Index() {
   };
 
   return (
-    <div className="flex flex-col p-4 gap-3 items-start">
+    <div className="flex flex-col p-8 gap-3 items-start">
       <span className="bg-muted text-muted-foreground p-3 py-1 rounded-sm">
         Index
       </span>
       <p>{t("some.value")}</p>
       <Group className="gap-4">
+        <Button size="icon">
+          <Icons.Application.Team />
+        </Button>
         <Button variant="default">Default Button</Button>
         <Button variant="primary">Primary Button</Button>
-        <Button variant="outline">Outline Button</Button>
         <Button variant="dashed">Dashed Button</Button>
         <Button variant="ghost">Ghost Button</Button>
       </Group>
