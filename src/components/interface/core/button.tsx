@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes } from "react";
-
 import { Spinner } from "@ui-symbols/spinner";
 import { Interface } from "@utils/interface";
+
+import type { ButtonHTMLAttributes } from "react";
 
 const [buttonVariants, applyButtonVariants] =
   Interface.Methods.registerVariants({

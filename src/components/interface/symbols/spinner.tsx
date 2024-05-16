@@ -1,5 +1,3 @@
-import { HTMLAttributes } from "react";
-
 import { Icons } from "@/config/icons";
 import { Interface } from "@utils/interface";
 
@@ -12,7 +10,7 @@ const [spinnerVariants, applySpinnerVariants] =
 
 export const Spinner = Interface.Methods.createComponent<
   Icons.Types.Component,
-  HTMLAttributes<Icons.Types.Component>,
+  Interface.Bundle.Types.HTMLAttributes<Icons.Types.Component>,
   typeof spinnerVariants,
   {} & Icons.Types.ComponentProps
 >({

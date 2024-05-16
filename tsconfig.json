@@ -37,6 +37,7 @@
       "@actions/*": ["./src/handlers/actions/*"],
       "@ui-core/*": ["./src/components/interface/core/*"],
       "@ui-layout/*": ["./src/components/interface/layout/*"],
+      "@ui-forms/*": ["./src/components/interface/forms/*"],
       "@ui-symbols/*": ["./src/components/interface/symbols/*"],
       "@ui-typography/*": ["./src/components/interface/typography/*"]
     }

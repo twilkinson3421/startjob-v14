@@ -59,7 +59,7 @@ export namespace Interface {
 
     export function createComponent<
       ComponentType extends Element | React.ComponentType,
-      ComponentAttributes extends React.HTMLAttributes<any>,
+      ComponentAttributes extends React.HTMLAttributes<ComponentType>,
       VariantsDeclaration extends Types.VariantsDeclaration<
         VariantsDeclaration["variants"]
       >,
@@ -91,5 +91,10 @@ export namespace Interface {
 
   export namespace Bundle {
     export const cn = cn_internal;
+
+    export namespace Types {
+      export type HTMLAttributes<TemplateElement> =
+        React.HTMLAttributes<TemplateElement>;
+    }
   }
 }
