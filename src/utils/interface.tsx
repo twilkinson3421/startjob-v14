@@ -66,11 +66,9 @@ export namespace Interface {
       PropTypes extends Record<string, any>
     >({
       debugName,
-      variants: _variants,
       component,
     }: {
       debugName: string;
-      variants: VariantsDeclaration;
       component: React.ForwardRefRenderFunction<
         ComponentType,
         ComponentAttributes &
