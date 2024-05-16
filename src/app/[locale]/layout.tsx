@@ -7,6 +7,7 @@ import { dictionary } from "@locale/compileDictionary";
 import { LocaleLogProvider } from "@locale/logProvider";
 import { AuthProvider } from "@providers/auth";
 import { LocaleContextProvider } from "@providers/locale";
+import { Interface } from "@utils/interface";
 
 const fontSans = FontSans({
   subsets: ["latin", "latin-ext"],
@@ -28,7 +29,7 @@ export default function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning={coreConfig.suppressHydrationWarning}
-      className={fontSans.className}
+      className={Interface.Bundle.cn(fontSans.className, "light-theme")}
     >
       <body>
         <LocaleLogProvider />

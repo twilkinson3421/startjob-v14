@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+$global-theme: (
+  --primary: #380274,
+);
+
+$light-theme-override: (
+  --background: #ffffff,
+  --foreground: #000000,
+);
+
+$dark-theme-override: (
+  --background: #1a181a,
+  --foreground: #ffffff,
+);
+
+$light-theme: map-merge($global-theme, $light-theme-override);
+$dark-theme: map-merge($global-theme, $dark-theme-override);
+
+:root {
+  @each $property, $value in $light-theme {
+    #{$property}: #{$value};
+  }
+
+  &:is(.dark-theme) {
+    @each $property, $value in $dark-theme {
+      #{$property}: #{$value};
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @each $property, $value in $dark-theme {
+      #{$property}: #{$value};
+    }
+
+    &:is(.light-theme) {
+      @each $property, $value in $light-theme {
+        #{$property}: #{$value};
+      }
+    }
+  }
+}
+
+body {
+  @apply bg-background text-foreground;
+}

@@ -16,7 +16,7 @@ export default function Index() {
     <div className="flex flex-col p-2 gap-2 items-start">
       <span>Index</span>
       <p>{t("some.value")}</p>
-      <Button variant="secondary">Test Button</Button>
+      <Button variant="primary">Test Button</Button>
       <Group>
         <Icons.Application.Email />
         <Icons.Application.User />

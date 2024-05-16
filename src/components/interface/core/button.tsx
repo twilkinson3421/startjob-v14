@@ -7,7 +7,7 @@ const [buttonVariants, applyButtonVariants] =
     base: "p-2 bg-blue-500 rounded-md text-white transition-all duration-100",
     variants: {
       variant: {
-        primary: "bg-blue-500",
+        primary: "bg-primary",
         secondary:
           "bg-transparent, text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white",
       },
