@@ -9,9 +9,40 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "var(--primary)",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+
+        border: "hsl(var(--border))",
+      },
+
+      borderRadius: {
+        sm: "calc(var(--radius) * 0.5)",
+        md: "calc(var(--radius))",
+        lg: "calc(var(--radius) * 1.5)",
+        full: "calc(var(--radius) * 9999)",
+      },
+
+      transitionDuration: {
+        default: "var(--transition)",
       },
     },
   },

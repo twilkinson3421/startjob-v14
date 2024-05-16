@@ -2,18 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+$theme-white: 225 100% 99%;
+$theme-black: 268 4% 10%;
+
 $global-theme: (
-  --primary: #380274,
+  --primary: 268 97% 23%,
+  --primary-foreground: $theme-white,
+
+  --destructive: 0 84% 58%,
+  --destructive-foreground: $theme-white,
+
+  --success: 140 70% 50%,
+  --success-foreground: $theme-white,
+
+  --muted: 174 4.9% 92.2%,
+  --muted-foreground: 174 2.45% 42.2%,
+
+  --border: 174 9.9% 89.88%,
+
+  --radius: 0.4rem,
+  --transition: 0.1s,
 );
 
 $light-theme-override: (
-  --background: #ffffff,
-  --foreground: #000000,
+  --background: $theme-white,
+  --foreground: $theme-black,
 );
 
 $dark-theme-override: (
-  --background: #1a181a,
-  --foreground: #ffffff,
+  --background: $theme-black,
+  --foreground: $theme-white,
 );
 
 $light-theme: map-merge($global-theme, $light-theme-override);
@@ -43,6 +61,16 @@ $dark-theme: map-merge($global-theme, $dark-theme-override);
   }
 }
 
-body {
-  @apply bg-background text-foreground;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  :root * {
+    @apply transition-all duration-300;
+  }
 }

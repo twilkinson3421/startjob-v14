@@ -1,42 +1,41 @@
-import { Interface } from "@utils/interface";
+import { ButtonHTMLAttributes } from "react";
 
-// TODO: Is currently just proof of concept - implement!
+import { Interface } from "@utils/interface";
 
 const [buttonVariants, applyButtonVariants] =
   Interface.Methods.registerVariants({
-    base: "p-2 bg-blue-500 rounded-md text-white transition-all duration-100",
+    base: "px-4 py-2 rounded-md shadow-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed border border-transparent",
     variants: {
       variant: {
-        primary: "bg-primary",
-        secondary:
-          "bg-transparent, text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white",
-      },
-      size: {
-        small: "p-1",
-        medium: "p-2",
-        large: "p-4",
+        primary: "bg-primary text-white hover:opacity-70",
+        default:
+          "bg-transparent border-muted-foreground hover:border-primary hover:text-primary",
+        outline:
+          "bg-transparent border-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground",
+        dashed:
+          "border-muted-foreground border-dashed hover:border-primary hover:text-primary",
+        ghost: "shadow-none hover:bg-muted",
       },
     },
     default: {
-      variant: "primary",
-      size: "medium",
+      variant: "default",
     },
   } as const);
 
 export const Button = Interface.Methods.createComponent<
   HTMLButtonElement,
+  ButtonHTMLAttributes<HTMLButtonElement>,
   typeof buttonVariants,
   {}
 >({
   debugName: "Button",
   variants: buttonVariants,
-  component: ({ children, className, variant, size, ...props }, ref) => {
+  component: ({ children, className, variant, ...props }, ref) => {
     return (
       <button
         className={Interface.Bundle.cn(
-          applyButtonVariants({ variant, size }),
-          className,
-          ""
+          applyButtonVariants({ variant }),
+          className
         )}
         ref={ref}
         {...props}
