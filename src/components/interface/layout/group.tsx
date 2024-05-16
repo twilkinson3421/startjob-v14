@@ -15,7 +15,6 @@ export const Group = Interface.Methods.createComponent<
   {}
 >({
   debugName: "Group",
-  variants: groupVariants,
   component: ({ children, className, ...props }, ref) => {
     return (
       <div

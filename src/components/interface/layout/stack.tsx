@@ -15,7 +15,6 @@ export const Stack = Interface.Methods.createComponent<
   {}
 >({
   debugName: "Stack",
-  variants: stackVariants,
   component: ({ children, className, ...props }, ref) => {
     return (
       <div
