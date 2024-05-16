@@ -1,3 +1,5 @@
+import { HTMLAttributes } from "react";
+
 import { Interface } from "@utils/interface";
 
 const [stackVariants, applyStackVariants] = Interface.Methods.registerVariants({
@@ -8,6 +10,7 @@ const [stackVariants, applyStackVariants] = Interface.Methods.registerVariants({
 
 export const Stack = Interface.Methods.createComponent<
   HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>,
   typeof stackVariants,
   {}
 >({

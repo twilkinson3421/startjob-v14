@@ -59,6 +59,7 @@ export namespace Interface {
 
     export function createComponent<
       ComponentType extends HTMLElement,
+      ComponentAttributes extends React.HTMLAttributes<any>,
       VariantsDeclaration extends Types.VariantsDeclaration<
         VariantsDeclaration["variants"]
       >,
@@ -72,12 +73,12 @@ export namespace Interface {
       variants: VariantsDeclaration;
       component: React.ForwardRefRenderFunction<
         ComponentType,
-        React.HTMLAttributes<ComponentType> &
+        ComponentAttributes &
           Types.VariantProps<VariantsDeclaration["variants"]> &
           PropTypes
       >;
     }) {
-      type ComponentProps = React.HTMLAttributes<ComponentType> &
+      type ComponentProps = ComponentAttributes &
         Types.VariantProps<VariantsDeclaration["variants"]> &
         PropTypes;
 

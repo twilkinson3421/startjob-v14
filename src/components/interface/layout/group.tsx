@@ -1,3 +1,5 @@
+import { HTMLAttributes } from "react";
+
 import { Interface } from "@utils/interface";
 
 const [groupVariants, applyGroupVariants] = Interface.Methods.registerVariants({
@@ -8,6 +10,7 @@ const [groupVariants, applyGroupVariants] = Interface.Methods.registerVariants({
 
 export const Group = Interface.Methods.createComponent<
   HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>,
   typeof groupVariants,
   {}
 >({
