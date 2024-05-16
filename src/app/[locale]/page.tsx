@@ -7,6 +7,7 @@ import { genT } from "@locale/translate";
 import { useLocaleContext } from "@providers/locale";
 import { Button } from "@ui-core/button";
 import { Group } from "@ui-layout/group";
+import { Spinner } from "@ui-symbols/spinner";
 
 export default function Index() {
   const { locale, dictionary } = useLocaleContext();
@@ -41,6 +42,7 @@ export default function Index() {
       >
         Log Out
       </Button>
+      <Spinner />
     </div>
   );
 }
