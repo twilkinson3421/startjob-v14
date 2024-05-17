@@ -7,7 +7,8 @@ export namespace Interface {
     export type VariantsDeclaration<NamedVariants extends Internal.Variant> =
       Internal.BaseVariant &
         Internal.NamedVariants &
-        Internal.DefaultVariants<NamedVariants>;
+        Internal.DefaultVariants<NamedVariants> &
+        Partial<Internal.CompoundVariants<NamedVariants>>;
 
     export type VariantProps<GivenNamedVariants extends Internal.Variant> = {
       [Key in keyof GivenNamedVariants]?: keyof GivenNamedVariants[Key];
@@ -26,6 +27,16 @@ export namespace Interface {
       {
         [Key in keyof GivenNamedVariants]: keyof GivenNamedVariants[Key];
       }
+    >;
+
+    export type CompoundVariants<GivenNamedVariants extends Variant> = Record<
+      "compound",
+      {
+        match: {
+          [Key in keyof GivenNamedVariants]?: keyof GivenNamedVariants[Key];
+        };
+        style: VariantValue;
+      }[]
     >;
   }
 
@@ -50,6 +61,43 @@ export namespace Interface {
                 variants.default[variant]
             ]
         );
+
+        //* Apply compound variants ->
+        //? Example ->
+
+        //? compound: [
+        //?   {
+        //?     match: {
+        //?       variantName: {value to check for}
+        //?       otherVariantName: {value to check for}
+        //?       ...
+        //?     },
+        //?     style: {style to be applied}
+        //?   }
+        //?   ...
+        //? ]
+
+        //^ 1. Check if all [name, value] pairs in the variants object match the values in the options object
+
+        //^ 2. Return true if the value specified is the default value AND no value was given in the options object
+
+        //^ 3. If passing, push the given style to the variantsStyleList
+
+        variants.compound?.forEach((compoundVariant) => {
+          if (!compoundVariant.match) return;
+          if (
+            Object.entries(compoundVariant.match).every(
+              ([variantName, variantValue]) => {
+                const valueIsDefault =
+                  variants.default[variantName] === variantValue;
+                if (valueIsDefault && !options[variantName]) return true;
+                return options[variantName] === variantValue;
+              }
+            )
+          ) {
+            variantsStyleList.push(compoundVariant.style);
+          }
+        });
 
         return Bundle.cn(baseStyle, ...variantsStyleList);
       };
