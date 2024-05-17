@@ -119,7 +119,7 @@ export namespace Input {
       },
       variant: {
         default: "",
-        nub: "px-3 bg-muted",
+        nub: "px-3 bg-muted cursor-default",
       },
     },
     default: {
