@@ -13,7 +13,7 @@ export const Stack = Interface.Methods.createComponent<
   {}
 >({
   debugName: "Stack",
-  component: ({ children, className, ...props }, ref) => {
+  Component: ({ children, className, ...props }, ref) => {
     return (
       <div
         className={Interface.Bundle.cn(applyStackVariants({}), className)}

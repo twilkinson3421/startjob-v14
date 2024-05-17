@@ -15,7 +15,7 @@ export const Spinner = Interface.Methods.createComponent<
   {} & Icons.Types.ComponentProps
 >({
   debugName: "Spinner",
-  component: ({ children, className, ...props }, ref) => {
+  Component: ({ className, ...props }, ref) => {
     return (
       <Icons.Interface.Spinner
         className={Interface.Bundle.cn(applySpinnerVariants({}), className)}

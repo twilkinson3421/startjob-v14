@@ -66,10 +66,10 @@ export namespace Interface {
       PropTypes extends Record<string, any>
     >({
       debugName,
-      component,
+      Component: PassedComponent,
     }: {
       debugName: string;
-      component: React.ForwardRefRenderFunction<
+      Component: React.ForwardRefRenderFunction<
         ComponentType,
         ComponentAttributes &
           Types.VariantProps<VariantsDeclaration["variants"]> &
@@ -81,7 +81,7 @@ export namespace Interface {
         PropTypes;
 
       const Component = React.forwardRef<ComponentType, ComponentProps>(
-        component
+        PassedComponent
       );
       Component.displayName = debugName;
 

@@ -13,7 +13,7 @@ export const Group = Interface.Methods.createComponent<
   {}
 >({
   debugName: "Group",
-  component: ({ children, className, ...props }, ref) => {
+  Component: ({ children, className, ...props }, ref) => {
     return (
       <div
         className={Interface.Bundle.cn(applyGroupVariants({}), className)}

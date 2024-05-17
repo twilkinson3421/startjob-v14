@@ -37,7 +37,7 @@ export const Button = Interface.Methods.createComponent<
   { loading?: boolean; hideContentWhenLoading?: boolean }
 >({
   debugName: "Button",
-  component: (
+  Component: (
     {
       children,
       className,
