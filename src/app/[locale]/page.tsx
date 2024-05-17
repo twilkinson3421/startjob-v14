@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Icons } from "@/config/icons";
 import { genT } from "@locale/translate";
 import { useLocaleContext } from "@providers/locale";
+import { PasswordStateProvider } from "@providers/password";
 import { Button } from "@ui-core/button";
 import { Input } from "@ui-forms/input";
 import { Group } from "@ui-layout/group";
@@ -57,6 +58,14 @@ export default function Index() {
         </Input.Slot>
         <Input.Input />
       </Input.Root>
+      <PasswordStateProvider>
+        <Input.Root>
+          <Input.Slot>
+            <Icons.Application.User />
+          </Input.Slot>
+          <Input.Input variant="password" />
+        </Input.Root>
+      </PasswordStateProvider>
     </div>
   );
 }

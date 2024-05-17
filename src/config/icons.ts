@@ -1,9 +1,5 @@
 import {
-  IconAt,
-  IconLoader2,
-  IconMenu,
-  IconUser,
-  IconUsersGroup,
+    IconAt, IconEye, IconEyeOff, IconLoader2, IconMenu, IconUser, IconUsersGroup
 } from "@tabler/icons-react";
 
 import type { Icon, IconProps } from "@tabler/icons-react";
@@ -43,6 +39,8 @@ export namespace Icons {
     Interface: {
       Menu: IconMenu,
       Spinner: IconLoader2,
+      Show: IconEye,
+      Hide: IconEyeOff,
     },
 
     Application: {

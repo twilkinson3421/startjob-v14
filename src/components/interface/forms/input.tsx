@@ -1,12 +1,17 @@
 "use client";
 
-import { useRef } from "react";
+import * as React from "react";
 
+import { Icons } from "@config/icons";
+import { useTranslationContext } from "@providers/locale";
+import { usePasswordStateContext } from "@providers/password";
+import { Button } from "@ui-core/button";
 import { Interface } from "@utils/interface";
 
+import type { PasswordStateContextValue } from "@providers/password";
 export namespace Input {
   const [rootVariants, applyRootVariants] = Interface.Methods.registerVariants({
-    base: "flex items-stretch w-full rounded-md border border-border shadow-sm bg-background cursor-text overflow-clip placeholder:text-muted-foreground [&:has(>input:focus-visible)]:border-primary [&:has(>input:disabled)]:cursor-not-allowed [&:has(>input:disabled)]:opacity-50",
+    base: "flex items-stretch w-full rounded-md border border-border shadow-sm bg-background cursor-text overflow-clip transition-all placeholder:text-muted-foreground [&:has(>input:focus-visible)]:border-primary [&:has(>input:disabled)]:cursor-not-allowed [&:has(>input:disabled)]:opacity-50",
     variants: {},
     default: {},
   } as const);
@@ -19,10 +24,10 @@ export namespace Input {
   >({
     debugName: "InputRoot",
     Component: ({ children, className, ...props }, ref) => {
-      const rootContainer = useRef<HTMLDivElement>(null);
+      const rootContainer = React.useRef<HTMLDivElement>(null);
 
-      // * Focuses the input component...
-      // * ...and sets the cursor position based on the pointer position
+      //* Focuses the input component...
+      //* ...and sets the cursor position based on the pointer position
       const handlePointerDown = (e: React.MouseEvent) => {
         e.preventDefault();
         if (!rootContainer.current) return;
@@ -67,19 +72,36 @@ export namespace Input {
 
   export const Input = Interface.Methods.createComponent<
     HTMLInputElement,
-    Interface.Bundle.Types.HTMLAttributes<HTMLInputElement>,
+    React.InputHTMLAttributes<HTMLInputElement>,
     typeof inputVariants,
-    {}
+    {
+      variant?: "default" | "password";
+    }
   >({
     debugName: "InputInput",
-    Component: ({ className, ...props }, ref) => {
+    Component: ({ className, variant, type, ...props }, ref) => {
+      const passwordStateController = usePasswordStateContext();
+
+      const inputType: React.InputHTMLAttributes<HTMLInputElement>["type"] =
+        (() => {
+          if (variant !== "password") return type;
+          if (!passwordStateController.show) return "password";
+          return type;
+        })();
+
       return (
-        <input
-          onPointerDown={(e) => e.stopPropagation()}
-          className={Interface.Bundle.cn(applyInputVariants({}), className)}
-          ref={ref}
-          {...props}
-        />
+        <>
+          <input
+            onPointerDown={(e) => e.stopPropagation()}
+            type={inputType}
+            className={Interface.Bundle.cn(applyInputVariants({}), className)}
+            ref={ref}
+            {...props}
+          />
+          {variant === "password" && (
+            <PasswordVisibilityToggle {...{ passwordStateController }} />
+          )}
+        </>
       );
     },
   });
@@ -105,7 +127,7 @@ export namespace Input {
       align: "default",
       variant: "default",
     },
-  } as const);
+  });
 
   export const Slot = Interface.Methods.createComponent<
     HTMLDivElement,
@@ -132,6 +154,55 @@ export namespace Input {
         >
           {children}
         </div>
+      );
+    },
+  });
+
+  const [
+    passwordVisibilityToggleVariants,
+    applyPasswordVisibilityToggleVariants,
+  ] = Interface.Methods.registerVariants({
+    base: "px-0",
+    variants: {},
+    default: {},
+  } as const);
+
+  const PasswordVisibilityToggle = Interface.Methods.createComponent<
+    HTMLDivElement,
+    Omit<Interface.Bundle.Types.HTMLAttributes<HTMLDivElement>, "children">,
+    typeof passwordVisibilityToggleVariants,
+    { passwordStateController: PasswordStateContextValue }
+  >({
+    debugName: "InputPasswordVisibilityToggle",
+    Component: ({ className, passwordStateController, ...props }, ref) => {
+      const {} = useTranslationContext();
+
+      const togglePasswordVisibility = () =>
+        passwordStateController.setShow(!passwordStateController.show);
+
+      const Icon = passwordStateController.show
+        ? Icons.Interface.Hide
+        : Icons.Interface.Show;
+
+      return (
+        <Slot
+          variant="nub"
+          side="right"
+          className={Interface.Bundle.cn(
+            applyPasswordVisibilityToggleVariants({}),
+            className
+          )}
+          ref={ref}
+          {...props}
+        >
+          <Button
+            variant="ghost"
+            className="hover:bg-transparent border-none"
+            onClick={togglePasswordVisibility}
+          >
+            <Icon />
+          </Button>
+        </Slot>
       );
     },
   });
