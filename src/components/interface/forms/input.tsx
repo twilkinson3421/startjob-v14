@@ -11,7 +11,7 @@ import { Interface } from "@utils/interface";
 import type { PasswordStateContextValue } from "@providers/password";
 export namespace Input {
   const [rootVariants, applyRootVariants] = Interface.Methods.registerVariants({
-    base: "flex items-stretch w-full rounded-md border border-border shadow-sm bg-background cursor-text overflow-clip transition-all placeholder:text-muted-foreground [&:has(>input:focus-visible)]:border-primary [&:has(>input:disabled)]:cursor-not-allowed [&:has(>input:disabled)]:opacity-50",
+    base: "flex items-stretch w-full rounded-md border border-border shadow-sm bg-background cursor-text overflow-auto transition-all placeholder:text-muted-foreground [&:has(>input:focus-visible)]:border-primary [&:has(>input:disabled)]:cursor-not-allowed [&:has(>input:disabled)]:opacity-50",
     variants: {},
     default: {},
   } as const);
@@ -197,7 +197,7 @@ export namespace Input {
         >
           <Button
             variant="ghost"
-            className="hover:bg-transparent border-none"
+            className="hover:bg-transparent border-none -outline-offset-1 rounded-s-none"
             onClick={togglePasswordVisibility}
           >
             <Icon />
