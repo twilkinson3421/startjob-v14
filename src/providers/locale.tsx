@@ -3,6 +3,7 @@
 import { createContext, useContext } from "react";
 
 import { localeConfig } from "@/locale/config";
+import { genT } from "@locale/translate";
 
 type LocaleContextValue = {
   locale: GTypes.Locale.Locale;
@@ -19,7 +20,7 @@ const LocaleContext = createContext<LocaleContextValue>({
 });
 
 const TranslationContext = createContext<TranslationContextValue>({
-  translator: null as any,
+  translator: genT(),
 });
 
 export const LocaleContextProvider = ({
@@ -35,11 +36,13 @@ export const LocaleContextProvider = ({
 export const TranslationContextProvider = ({
   children,
   translator,
-}: GTypes.Basic.ReactNode & TranslationContextValue) => (
-  <TranslationContext.Provider value={{ translator }}>
-    {children}
-  </TranslationContext.Provider>
-);
+}: GTypes.Basic.ReactNode & TranslationContextValue) => {
+  return (
+    <TranslationContext.Provider value={{ translator }}>
+      {children}
+    </TranslationContext.Provider>
+  );
+};
 
 export const useLocaleContext = () => useContext(LocaleContext);
 export const useTranslationContext = () => useContext(TranslationContext);

@@ -3,9 +3,13 @@
 import * as React from "react";
 
 import { Icons } from "@config/icons";
-import { useTranslationContext } from "@providers/locale";
+import { genT } from "@locale/translate";
+import {
+    TranslationContextProvider, useLocaleContext, useTranslationContext
+} from "@providers/locale";
 import { usePasswordStateContext } from "@providers/password";
 import { Button } from "@ui-core/button";
+import { Tooltip } from "@ui-core/tooltip";
 import { Interface } from "@utils/interface";
 
 import type { PasswordStateContextValue } from "@providers/password";
@@ -48,6 +52,9 @@ export namespace Input {
         });
       };
 
+      const { locale, dictionary } = useLocaleContext();
+      const t = genT(locale, "interface.forms.input", dictionary);
+
       return (
         <div className="w-full" ref={rootContainer}>
           <div
@@ -56,7 +63,9 @@ export namespace Input {
             ref={ref}
             {...props}
           >
-            {children}
+            <TranslationContextProvider {...{ translator: t }}>
+              {children}
+            </TranslationContextProvider>
           </div>
         </div>
       );
@@ -182,7 +191,7 @@ export namespace Input {
   >({
     debugName: "InputPasswordVisibilityToggle",
     Component: ({ className, passwordStateController, ...props }, ref) => {
-      const {} = useTranslationContext();
+      const { translator: t } = useTranslationContext();
 
       const togglePasswordVisibility = () =>
         passwordStateController.setShow(!passwordStateController.show);
@@ -202,13 +211,27 @@ export namespace Input {
           ref={ref}
           {...props}
         >
-          <Button
-            variant="ghost"
-            className="hover:bg-transparent border-none -outline-offset-1 rounded-s-none"
-            onClick={togglePasswordVisibility}
-          >
-            <Icon />
-          </Button>
+          <Tooltip.Root>
+            <Tooltip.Trigger
+              aria-label="Toggle Password Visibility Tooltip"
+              render={
+                <Button
+                  variant="ghost"
+                  className="hover:bg-transparent border-none -outline-offset-1 rounded-s-none"
+                  onClick={togglePasswordVisibility}
+                >
+                  <Icon />
+                </Button>
+              }
+            />
+            <Tooltip.Content>
+              {t(
+                `password_toggle.toggle.${
+                  passwordStateController.show ? "hide" : "show"
+                }`
+              )}
+            </Tooltip.Content>
+          </Tooltip.Root>
         </Slot>
       );
     },
