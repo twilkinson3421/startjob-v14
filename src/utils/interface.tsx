@@ -8,7 +8,9 @@ export namespace Interface {
       Internal.BaseVariant &
         Internal.NamedVariants &
         Internal.DefaultVariants<NamedVariants> &
-        Partial<Internal.CompoundVariants<NamedVariants>>;
+        Partial<Internal.CompoundVariants<NamedVariants>> &
+        Partial<Internal.ImpliedVariants<NamedVariants, "impliedAND">> &
+        Partial<Internal.ImpliedVariants<NamedVariants, "impliedOR">>;
 
     export type VariantProps<GivenNamedVariants extends Internal.Variant> = {
       [Key in keyof GivenNamedVariants]?: keyof GivenNamedVariants[Key];
@@ -31,12 +33,27 @@ export namespace Interface {
 
     export type CompoundVariants<GivenNamedVariants extends Variant> = Record<
       "compound",
-      {
+      Array<{
         match: {
           [Key in keyof GivenNamedVariants]?: keyof GivenNamedVariants[Key];
         };
         style: VariantValue;
-      }[]
+      }>
+    >;
+
+    export type ImpliedVariants<
+      GivenNamedVariants extends Variant,
+      ObjectName extends string
+    > = Record<
+      ObjectName,
+      Array<{
+        match: {
+          [Key in keyof GivenNamedVariants]?: keyof GivenNamedVariants[Key];
+        };
+        implies: {
+          [Key in keyof GivenNamedVariants]?: keyof GivenNamedVariants[Key];
+        };
+      }>
     >;
   }
 
@@ -51,6 +68,70 @@ export namespace Interface {
       }) => {
         const baseStyle = variants.base;
         const variantsList = Object.keys(variants.variants);
+
+        //* Change options to conform to applied variants ->
+        //? Format for impliedOR and impliedAND:
+
+        //? impliedAND: [
+        //?   {
+        //?     match: { {variant name}: {variant value to check for} },
+        //?     implies: { {variant name}: {value to be applied if match met} },
+        //?   },
+        //? ],
+
+        //^ For impliedOR:
+        //^ If at least one match is met, all implies are applied
+
+        //^ For impliedAND:
+        //^ If all matches are met, all implies are applied
+
+        variants.impliedOR?.forEach((impliedORVariant) => {
+          if (!impliedORVariant.match) return;
+          if (!impliedORVariant.implies) return;
+
+          if (
+            Object.entries(impliedORVariant.match).some(
+              ([variantName, variantValue]) => {
+                const valueIsDefault =
+                  variants.default[variantName] === variantValue;
+                if (valueIsDefault && !options[variantName]) return true;
+                return options[variantName] === variantValue;
+              }
+            )
+          ) {
+            Object.entries(impliedORVariant.implies).forEach(
+              ([impliedVariantName, impliedVariantValue]) => {
+                options[impliedVariantName as keyof typeof options] =
+                  impliedVariantValue;
+              }
+            );
+          }
+        });
+
+        variants.impliedAND?.forEach((impliedANDVariant) => {
+          if (!impliedANDVariant.match) return;
+          if (!impliedANDVariant.implies) return;
+
+          if (
+            Object.entries(impliedANDVariant.match).every(
+              ([variantName, variantValue]) => {
+                const valueIsDefault =
+                  variants.default[variantName] === variantValue;
+                if (valueIsDefault && !options[variantName]) return true;
+                return options[variantName] === variantValue;
+              }
+            )
+          ) {
+            Object.entries(impliedANDVariant.implies).forEach(
+              ([impliedVariantName, impliedVariantValue]) => {
+                options[impliedVariantName as keyof typeof options] =
+                  impliedVariantValue;
+              }
+            );
+          }
+        });
+
+        //* Apply styles from named variants ->
 
         const variantsStyleList = variantsList.map(
           (variant) =>

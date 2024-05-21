@@ -80,6 +80,7 @@ export namespace Input {
   >({
     debugName: "InputInput",
     Component: ({ className, variant, type, ...props }, ref) => {
+      variant ??= "default";
       const passwordStateController = usePasswordStateContext();
 
       const inputType: React.InputHTMLAttributes<HTMLInputElement>["type"] =
@@ -110,12 +111,12 @@ export namespace Input {
     base: "flex items-center justify-center text-muted-foreground",
     variants: {
       side: {
-        left: "pl-3",
-        right: "pr-3",
+        left: "ml-3",
+        right: "mr-3",
       },
       align: {
         default: "",
-        flush: "px-0",
+        flush: "mx-0",
       },
       variant: {
         default: "",
@@ -127,7 +128,13 @@ export namespace Input {
       align: "default",
       variant: "default",
     },
-  });
+    impliedAND: [
+      {
+        match: { variant: "nub" },
+        implies: { align: "flush" },
+      },
+    ],
+  } as const);
 
   export const Slot = Interface.Methods.createComponent<
     HTMLDivElement,
@@ -137,14 +144,14 @@ export namespace Input {
   >({
     debugName: "InputSlot",
     Component: (
-      { children, className, side, align, variant, ...props },
+      { children, className, side, align, variant, onPointerDown, ...props },
       ref
     ) => {
+      if (variant === "nub") onPointerDown ??= (e) => e.stopPropagation();
+
       return (
         <div
-          onPointerDown={(e) =>
-            variant === "nub" ? e.stopPropagation() : undefined
-          }
+          onPointerDown={onPointerDown}
           className={Interface.Bundle.cn(
             applySlotVariants({ side, align, variant }),
             className
