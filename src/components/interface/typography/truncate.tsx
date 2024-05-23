@@ -2,21 +2,23 @@
 
 import * as React from "react";
 
+import { interfaceConfig } from "@config/interface";
 import { Interface } from "@utils/interface";
 
 const SCROLL_DELAY = 200;
 const WAIT_BEFORE_RESET = 1200;
 
-const [truncVariants, applyTruncVariants] = Interface.Methods.registerVariants({
-  base: "truncate",
-  variants: {},
-  default: {},
-} as const);
+const [truncateVariants, applyTruncateVariants] =
+  Interface.Methods.registerVariants({
+    base: "truncate",
+    variants: {},
+    default: {},
+  } as const);
 
-export const Trunc = Interface.Methods.createComponent<
+export const Truncate = Interface.Methods.createComponent<
   HTMLSpanElement,
   Interface.Bundle.Types.HTMLAttributes<HTMLSpanElement>,
-  typeof truncVariants,
+  typeof truncateVariants,
   {}
 >({
   debugName: "Trunc",
@@ -25,8 +27,12 @@ export const Trunc = Interface.Methods.createComponent<
     const [shouldScroll, setShouldScroll] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-      if (!shouldScroll)
-        if (!window.matchMedia("(pointer: coarse)").matches) return;
+      const isCoarse = window.matchMedia("(pointer: coarse)").matches;
+      const shouldCoarseAutoScroll =
+        interfaceConfig.truncatedScrollTouchscreenAuto.enabled;
+      const isCoarseAndShouldAutoScroll = shouldCoarseAutoScroll && isCoarse;
+
+      if (!shouldScroll && !isCoarseAndShouldAutoScroll) return;
       if (!reference.current) return;
 
       const span = reference.current;
@@ -53,8 +59,10 @@ export const Trunc = Interface.Methods.createComponent<
                 willReset = false;
                 count++;
                 if (
-                  window.matchMedia("(pointer: coarse)").matches &&
-                  count >= 2
+                  isCoarseAndShouldAutoScroll &&
+                  !shouldScroll &&
+                  !interfaceConfig.truncatedScrollTouchscreenAuto.infinite &&
+                  count >= interfaceConfig.truncatedScrollTouchscreenAuto.max
                 )
                   return;
                 setTimeout(() => {
@@ -84,7 +92,7 @@ export const Trunc = Interface.Methods.createComponent<
         onBlur={() => setShouldScroll(false)}
         onPointerEnter={() => setShouldScroll(true)}
         onPointerLeave={() => setShouldScroll(false)}
-        className={Interface.Bundle.cn(applyTruncVariants({}), className)}
+        className={Interface.Bundle.cn(applyTruncateVariants({}), className)}
         ref={reference}
         {...props}
       >

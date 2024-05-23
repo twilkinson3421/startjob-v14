@@ -1,5 +1,5 @@
 import { Spinner } from "@ui-symbols/spinner";
-import { Trunc } from "@ui-typography/trunc";
+import { Truncate } from "@ui-typography/truncate";
 import { Interface } from "@utils/interface";
 
 import type { ButtonHTMLAttributes } from "react";
@@ -38,7 +38,7 @@ export const Button = Interface.Methods.createComponent<
   HTMLButtonElement,
   ButtonHTMLAttributes<HTMLButtonElement>,
   typeof buttonVariants,
-  { loading?: boolean; hideContentWhenLoading?: boolean }
+  { loading?: boolean; hideContentWhenLoading?: boolean; noTruncate?: boolean }
 >({
   debugName: "Button",
   Component: (
@@ -50,6 +50,7 @@ export const Button = Interface.Methods.createComponent<
       loading,
       disabled,
       hideContentWhenLoading,
+      noTruncate,
       ...props
     },
     ref
@@ -67,7 +68,8 @@ export const Button = Interface.Methods.createComponent<
         disabled={disabled || loading}
         {...props}
       >
-        {showChildren && <Trunc>{children}</Trunc>}
+        {showChildren &&
+          (noTruncate ? children : <Truncate>{children}</Truncate>)}
         {loading && <Spinner className="flex-shrink-0" />}
       </button>
     );
