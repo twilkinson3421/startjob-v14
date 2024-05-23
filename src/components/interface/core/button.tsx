@@ -1,9 +1,10 @@
+import * as React from "react";
+
 import { Spinner } from "@ui-symbols/spinner";
 import { Truncate } from "@ui-typography/truncate";
 import { Interface } from "@utils/interface";
 
 import type { ButtonHTMLAttributes } from "react";
-
 const [buttonVariants, applyButtonVariants] =
   Interface.Methods.registerVariants({
     base: "inline-flex items-center justify-between rounded-md shadow-sm font-medium select-none transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-transparent truncate",
@@ -57,6 +58,7 @@ export const Button = Interface.Methods.createComponent<
   ) => {
     hideContentWhenLoading ??= size === "icon";
     const showChildren = !loading || !hideContentWhenLoading;
+    const ChildWrapper = !!noTruncate ? React.Fragment : Truncate;
 
     return (
       <button
@@ -65,11 +67,10 @@ export const Button = Interface.Methods.createComponent<
           applyButtonVariants({ variant, size }),
           className
         )}
-        disabled={disabled || loading}
+        disabled={!!disabled || !!loading}
         {...props}
       >
-        {showChildren &&
-          (noTruncate ? children : <Truncate>{children}</Truncate>)}
+        {showChildren && <ChildWrapper>{children}</ChildWrapper>}
         {loading && <Spinner className="flex-shrink-0" />}
       </button>
     );
