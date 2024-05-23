@@ -214,7 +214,7 @@ export namespace Input {
           {...props}
         >
           <Tooltip.Tooltip>
-            <Tooltip.Trigger asChild>
+            <Tooltip.Root asChild>
               <Button
                 variant="ghost"
                 className="hover:bg-transparent border-none -outline-offset-1 rounded-s-none"
@@ -222,7 +222,7 @@ export namespace Input {
               >
                 <Icon />
               </Button>
-            </Tooltip.Trigger>
+            </Tooltip.Root>
             <Tooltip.Content>
               {t(
                 `password_toggle.toggle.${

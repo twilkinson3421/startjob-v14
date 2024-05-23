@@ -13,7 +13,7 @@ export namespace Tooltip {
 
   export const Provider = TooltipPrimitive.Provider;
   export const Tooltip = TooltipPrimitive.Tooltip;
-  export const Trigger = TooltipPrimitive.Trigger;
+  export const Root = TooltipPrimitive.Trigger;
 
   const [contentVariants, applyContentVariants] =
     Interface.Methods.registerVariants({
