@@ -32,7 +32,6 @@
       "@components/*": ["./src/components/*"],
       "@providers/*": ["./src/providers/*"],
       "@handlers/*": ["./src/handlers/*"],
-      "@modules/*": ["./src/modules/*"],
       "@locale/*": ["./src/locale/*"],
       "@config/*": ["./src/config/*"],
       "@models/*": ["./src/models/*"],

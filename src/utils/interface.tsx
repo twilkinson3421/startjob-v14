@@ -188,7 +188,7 @@ export namespace Interface {
 
     export function createComponent<
       ComponentType extends Element | React.ComponentType,
-      ComponentAttributes extends React.HTMLAttributes<ComponentType>,
+      ComponentAttributes extends Record<string, any>,
       VariantsDeclaration extends Types.VariantsDeclaration<
         VariantsDeclaration["variants"]
       >,

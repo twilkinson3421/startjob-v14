@@ -50,8 +50,10 @@ export default function Index() {
         <Button size="icon">
           <Icons.Application.Team />
         </Button>
+        <Button variant="destructive">Destructive Button</Button>
+        <Button variant="success">Success Button</Button>
       </Group>
-      <Input.Root>
+      <Input.Root className="w-3qtr">
         <Input.Slot variant="nub">https://</Input.Slot>
         <Input.Slot>
           <Icons.Application.User />
@@ -59,7 +61,7 @@ export default function Index() {
         <Input.Input />
       </Input.Root>
       <PasswordStateProvider>
-        <Input.Root>
+        <Input.Root className="w-3qtr">
           <Input.Slot>
             <Icons.Application.User />
           </Input.Slot>

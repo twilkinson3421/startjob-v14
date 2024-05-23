@@ -10,7 +10,10 @@ const [buttonVariants, applyButtonVariants] =
       variant: {
         default:
           "bg-transparent border-muted-foreground/50 hover:border-primary hover:text-primary",
-        primary: "bg-primary text-white hover:opacity-70",
+        primary: "bg-primary text-primary-foreground hover:opacity-70",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:opacity-70",
+        success: "bg-success text-success-foreground hover:opacity-70",
         outline:
           "bg-transparent border-muted-foreground/50 hover:bg-primary hover:border-primary hover:text-primary-foreground",
         dashed:
@@ -18,9 +21,9 @@ const [buttonVariants, applyButtonVariants] =
         ghost: "shadow-none hover:bg-muted",
       },
       size: {
-        default: "px-4 py-2 gap-4",
-        small: "px-3 py-1 gap-3",
-        large: "px-8 py-3 gap-8",
+        default: "px-inner-x-md py-inner-y-md gap-inner-x-md",
+        small: "px-inner-x-sm py-inner-y-sm gap-inner-x-sm",
+        large: "px-inner-x-lg py-inner-y-lg gap-inner-x-lg",
         icon: "p-2 justify-center gap-2",
       },
     },

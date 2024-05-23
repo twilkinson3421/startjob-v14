@@ -9,10 +9,13 @@ $global-theme: (
   --primary: 268 97% 23%,
   --primary-foreground: $theme-white,
 
+  --popover: 268 97% 98.75%,
+  --popover-foreground: $theme-black,
+
   --destructive: 0 84% 58%,
   --destructive-foreground: $theme-white,
 
-  --success: 140 70% 50%,
+  --success: 140 75% 40%,
   --success-foreground: $theme-white,
 
   --muted: 174 4.9% 92.2%,

@@ -5,7 +5,9 @@ import * as React from "react";
 import { Icons } from "@config/icons";
 import { genT } from "@locale/translate";
 import {
-    TranslationContextProvider, useLocaleContext, useTranslationContext
+  TranslationContextProvider,
+  useLocaleContext,
+  useTranslationContext,
 } from "@providers/locale";
 import { usePasswordStateContext } from "@providers/password";
 import { Button } from "@ui-core/button";
@@ -74,7 +76,7 @@ export namespace Input {
 
   const [inputVariants, applyInputVariants] =
     Interface.Methods.registerVariants({
-      base: "flex w-full bg-transparent px-3 py-2 border-none focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed",
+      base: "flex w-full bg-transparent px-inner-x-md py-inner-y-md border-none focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed",
       variants: {},
       default: {},
     } as const);
@@ -120,8 +122,8 @@ export namespace Input {
     base: "flex items-center justify-center text-muted-foreground",
     variants: {
       side: {
-        left: "ml-3",
-        right: "mr-3",
+        left: "ml-inner-x-md",
+        right: "mr-inner-x-md",
       },
       align: {
         default: "",
@@ -129,7 +131,7 @@ export namespace Input {
       },
       variant: {
         default: "",
-        nub: "px-3 bg-muted cursor-default",
+        nub: "px-inner-x-md bg-muted cursor-default",
       },
     },
     default: {
@@ -211,19 +213,16 @@ export namespace Input {
           ref={ref}
           {...props}
         >
-          <Tooltip.Root>
-            <Tooltip.Trigger
-              aria-label="Toggle Password Visibility Tooltip"
-              render={
-                <Button
-                  variant="ghost"
-                  className="hover:bg-transparent border-none -outline-offset-1 rounded-s-none"
-                  onClick={togglePasswordVisibility}
-                >
-                  <Icon />
-                </Button>
-              }
-            />
+          <Tooltip.Tooltip>
+            <Tooltip.Trigger asChild>
+              <Button
+                variant="ghost"
+                className="hover:bg-transparent border-none -outline-offset-1 rounded-s-none"
+                onClick={togglePasswordVisibility}
+              >
+                <Icon />
+              </Button>
+            </Tooltip.Trigger>
             <Tooltip.Content>
               {t(
                 `password_toggle.toggle.${
@@ -231,7 +230,7 @@ export namespace Input {
                 }`
               )}
             </Tooltip.Content>
-          </Tooltip.Root>
+          </Tooltip.Tooltip>
         </Slot>
       );
     },

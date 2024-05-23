@@ -6,6 +6,7 @@ import { coreConfig } from "@config/core";
 import { dictionary } from "@locale/compileDictionary";
 import { LocaleLogProvider } from "@locale/logProvider";
 import { AuthProvider } from "@providers/auth";
+import { InterfaceProvider } from "@providers/interface";
 import { LocaleContextProvider } from "@providers/locale";
 import { Interface } from "@utils/interface";
 
@@ -35,7 +36,7 @@ export default function RootLayout({
         <LocaleLogProvider />
         <AuthProvider>
           <LocaleContextProvider {...{ locale, dictionary }}>
-            {children}
+            <InterfaceProvider>{children}</InterfaceProvider>
           </LocaleContextProvider>
         </AuthProvider>
       </body>

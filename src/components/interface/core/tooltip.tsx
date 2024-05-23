@@ -1,74 +1,46 @@
-import { TooltipAnchorProps, TooltipProps } from "@ariakit/react";
-import { Tooltip as TooltipModule } from "@modules/tooltip";
+"use client";
+
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { Interface } from "@utils/interface";
 
 export namespace Tooltip {
-  export const Root = TooltipModule.TooltipProvider;
+  export namespace Types {
+    export type ProviderProps = TooltipPrimitive.TooltipProviderProps;
+    export type TooltipProps = TooltipPrimitive.TooltipProps;
+    export type TriggerProps = TooltipPrimitive.TooltipTriggerProps;
+    export type ContentProps = TooltipPrimitive.TooltipContentProps;
+  }
 
-  const [triggerVariants, applyTriggervariants] =
+  export const Provider = TooltipPrimitive.Provider;
+  export const Tooltip = TooltipPrimitive.Tooltip;
+  export const Trigger = TooltipPrimitive.Trigger;
+
+  const [contentVariants, applyContentVariants] =
     Interface.Methods.registerVariants({
-      base: "",
+      base: "bg-popover text-popover-foreground border rounded-md z-50 overflow-hidden px-inner-x-md py-inner-y-md text-sm shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
       variants: {},
       default: {},
     } as const);
 
-  export const Trigger = Interface.Methods.createComponent<
-    HTMLDivElement,
-    Internal.AnchorProps,
-    typeof triggerVariants,
+  export const Content = Interface.Methods.createComponent<
+    React.ElementRef<typeof TooltipPrimitive.Content>,
+    React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
+    typeof contentVariants,
     {}
   >({
-    debugName: "TooltipTrigger",
-    Component: ({ children, className, ...props }, ref) => {
+    debugName: "TooltipContent",
+    Component: (
+      { className, side = "top", sideOffset = 4, align = "center", ...props },
+      ref
+    ) => {
       return (
-        <TooltipModule.TooltipAnchor
-          render={() => children}
-          className={Interface.Bundle.cn(applyTriggervariants({}), className)}
+        <TooltipPrimitive.Content
+          {...{ side, sideOffset, align }}
+          className={Interface.Bundle.cn(applyContentVariants({}), className)}
           ref={ref}
           {...props}
         />
       );
     },
   });
-
-  const [contentVariants, applyContentvariants] =
-    Interface.Methods.registerVariants({
-      base: "bg-background rounded-md border shadow-md px-3 py-1",
-      variants: {
-        size: {
-          default: "text-sm",
-        },
-      },
-      default: {
-        size: "default",
-      },
-    } as const);
-
-  export const Content = Interface.Methods.createComponent<
-    HTMLDivElement,
-    TooltipProps,
-    typeof contentVariants,
-    {}
-  >({
-    debugName: "TooltipContent",
-    Component: ({ children, className, size, ...props }, ref) => {
-      return (
-        <TooltipModule.Tooltip
-          className={Interface.Bundle.cn(
-            applyContentvariants({ size }),
-            className
-          )}
-          ref={ref}
-          {...props}
-        >
-          {children}
-        </TooltipModule.Tooltip>
-      );
-    },
-  });
-
-  export namespace Internal {
-    export type AnchorProps = Omit<TooltipAnchorProps, "aria-label"> &
-      Required<Pick<TooltipAnchorProps, "aria-label">>;
-  }
 }
