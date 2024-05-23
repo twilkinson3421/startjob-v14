@@ -1,11 +1,12 @@
 import { Spinner } from "@ui-symbols/spinner";
+import { Trunc } from "@ui-typography/trunc";
 import { Interface } from "@utils/interface";
 
 import type { ButtonHTMLAttributes } from "react";
 
 const [buttonVariants, applyButtonVariants] =
   Interface.Methods.registerVariants({
-    base: "inline-flex items-center justify-between rounded-md shadow-sm font-medium select-none transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-transparent",
+    base: "inline-flex items-center justify-between rounded-md shadow-sm font-medium select-none transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-transparent truncate",
     variants: {
       variant: {
         default:
@@ -66,8 +67,8 @@ export const Button = Interface.Methods.createComponent<
         disabled={disabled || loading}
         {...props}
       >
-        {showChildren && children}
-        {loading && <Spinner />}
+        {showChildren && <Trunc>{children}</Trunc>}
+        {loading && <Spinner className="flex-shrink-0" />}
       </button>
     );
   },

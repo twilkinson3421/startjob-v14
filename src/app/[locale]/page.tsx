@@ -42,7 +42,7 @@ export default function Index() {
       </Group>
       <p>{t("some.value")}</p>
       <Group className="gap-4 flex-wrap">
-        <Button variant="default">Default Button</Button>
+        <Button>Default Button</Button>
         <Button variant="outline">Outline Button</Button>
         <Button variant="primary">Primary Button</Button>
         <Button variant="dashed">Dashed Button</Button>
@@ -50,7 +50,9 @@ export default function Index() {
         <Button size="icon">
           <Icons.Application.User />
         </Button>
-        <Button variant="destructive">Destructive Button</Button>
+        <Button variant="destructive" className="w-36">
+          Destructive Button Very Cool
+        </Button>
         <Button variant="success">Success Button</Button>
       </Group>
       <Input.Root className="w-3qtr">
