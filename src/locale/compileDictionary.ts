@@ -8,18 +8,18 @@ function compileDictionary() {
   if (typeof window !== "undefined") return undefined;
   const dictionary = {} as GTypes.Locale.Dictionary;
 
-  for (const iLocale of localeConfig.supported.locales) {
+  for (const i_locale of localeConfig.supported.locales) {
     const localeDictionary = {} as GTypes.Locale.LocaleDictionary;
 
-    for (const iNamespace of localeConfig.supported.namespaces) {
-      const filePath = getDictionaryPath(iLocale, iNamespace);
+    for (const i_namespace of localeConfig.supported.namespaces) {
+      const filePath = getDictionaryPath(i_locale, i_namespace);
 
       try {
         let fs;
         if (typeof window !== "undefined") throw new Error("Wrong Environment");
         if (typeof window === "undefined") fs = require("fs");
         const fileContents = fs.readFileSync(filePath, "utf8");
-        localeDictionary[iNamespace] = JSON.parse(fileContents);
+        localeDictionary[i_namespace] = JSON.parse(fileContents);
       } catch (error) {
         if (supportsColor)
           konsole.err(
@@ -31,7 +31,7 @@ function compileDictionary() {
       }
     }
 
-    dictionary[iLocale] = localeDictionary;
+    dictionary[i_locale] = localeDictionary;
   }
 
   return dictionary;
