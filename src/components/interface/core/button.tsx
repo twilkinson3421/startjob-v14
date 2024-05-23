@@ -24,7 +24,7 @@ const [buttonVariants, applyButtonVariants] =
         default: "px-inner-x-md py-inner-y-md gap-inner-x-md",
         small: "px-inner-x-sm py-inner-y-sm gap-inner-x-sm",
         large: "px-inner-x-lg py-inner-y-lg gap-inner-x-lg",
-        icon: "p-2 justify-center gap-2",
+        icon: "p-inner-y-md justify-center gap-inner-y-md",
       },
     },
     default: {

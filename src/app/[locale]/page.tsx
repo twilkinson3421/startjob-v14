@@ -48,7 +48,7 @@ export default function Index() {
         <Button variant="dashed">Dashed Button</Button>
         <Button variant="ghost">Ghost Button</Button>
         <Button size="icon">
-          <Icons.Application.Team />
+          <Icons.Application.User />
         </Button>
         <Button variant="destructive">Destructive Button</Button>
         <Button variant="success">Success Button</Button>
@@ -56,7 +56,7 @@ export default function Index() {
       <Input.Root className="w-3qtr">
         <Input.Slot variant="nub">https://</Input.Slot>
         <Input.Slot>
-          <Icons.Application.User />
+          <Icons.Application.Email />
         </Input.Slot>
         <Input.Input />
       </Input.Root>
