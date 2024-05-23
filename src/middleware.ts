@@ -1,6 +1,6 @@
 import { NextFetchEvent, NextRequest } from "next/server";
 
-import { localeMiddleware } from "./middleware/locale";
+import { localeMiddleware } from "@middleware/locale";
 
 export const middleware = (request: NextRequest, _event: NextFetchEvent) => {
   return localeMiddleware(request, _event);
