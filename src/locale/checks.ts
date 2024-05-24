@@ -11,7 +11,15 @@ export function checkSupportedLocales() {
           chalk.italic(i_locale)
         )} does not match the pattern ${chalk.yellow(
           chalk.italic(localeConfig.other.localePattern)
-        )} specified in the config file.`
+        )} specified in the config file`
       );
+  }
+
+  if (!localeConfig.supported.locales.includes(localeConfig.defaults.locale)) {
+    konsole.err(
+      `Default locale ${chalk.yellow(
+        chalk.italic(localeConfig.defaults.locale)
+      )} is not included as a supported locale`
+    );
   }
 }
