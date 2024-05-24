@@ -16,6 +16,7 @@ const fontSans = FontSans({
   style: ["normal", "italic"],
   variable: "--font-sans",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 export const metadata: GTypes.Basic.Metadata = {
