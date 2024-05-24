@@ -6,7 +6,7 @@ export const localeConfig = createLocaleConfig({
   defaultLocale: "en-GB",
   defaultNamespace: "common",
   cookieName: "hl",
-  localePattern: /^[a-z, A-Z]{2}-[a-z, A-Z]{2}$/,
+  localePattern: /[a-z, A-Z]{2}-[a-z, A-Z]{2}/,
   dictionaryPath: "src/locale/dictionary/{locale}/{namespace}.json",
   ignoreMiddleware: [
     "/static",

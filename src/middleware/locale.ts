@@ -33,7 +33,18 @@ export function localeMiddleware(request: NextRequest, _event: NextFetchEvent) {
     return response;
   }
 
-  if (localeConfig.other.localePattern.test(hostLocale)) {
+  const pattern = (() => {
+    let output = localeConfig.other.localePattern.toString();
+
+    if (output.startsWith("/")) output = output.slice(1);
+    if (output.endsWith("/")) output = output.slice(0, -1);
+    if (!output.startsWith("^")) output = `^${output}`;
+    if (!output.endsWith("$")) output = `${output}$`;
+
+    return new RegExp(output);
+  })();
+
+  if (pattern.test(hostLocale)) {
     const bestDestination = destinationLocale; // TODO Add best match
     const keep = request.nextUrl.pathname.split("/").slice(2);
     const location = !!keep.length ? `/${keep.join("/")}` : "";
